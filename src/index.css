@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/* Self-hosted Poppins, latin subset, served from /public/fonts so the URLs stay
+   stable enough to preload from index.html.
+
+   Only 500/600/800 are declared because those are the only weights the site uses.
+   Adding 400 would make every unstyled paragraph lighter (400 currently resolves
+   up to 500), and adding 700 would change the three `font-bold` spans in
+   ProjectPage (700 currently resolves up to 800). Both are visual changes, not
+   fixes. */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/poppins-v24-latin-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/poppins-v24-latin-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/poppins-v24-latin-800.woff2") format("woff2");
+}
+
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -53,7 +85,7 @@ html {
   padding: 0;
   box-sizing: border-box;
   background-color: var(--color-bg);
-  font-family: Poppins;
+  font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   overflow-x:hidden;
 }
 

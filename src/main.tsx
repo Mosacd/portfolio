@@ -3,8 +3,10 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './index.css'
 import ErrorBoundary from './components/ErrorBoundary.tsx'
+// App is the landing route for every visitor, so lazy-loading it only added a
+// sequential request after the main bundle parsed. ProjectPage stays lazy.
+import App from './App.tsx'
 
-const App = lazy(() => import('./App.tsx'))
 const ProjectPage = lazy(() => import('./components/projects/ProjectPage.tsx'))
 
 const PageFallback = () => (

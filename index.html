@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap" as="style">
-    <link rel="preload" as="image" href="/linkedin-image.jpg" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap" rel="stylesheet">
+    <!-- Self-hosted Poppins. All three weights appear above the fold (600 in the
+         header/nav, 800 in the hero heading, 500 in the hero subheads), so all three
+         are preloaded. ~23 KB total. crossorigin is required on font preloads even
+         for same-origin requests, or the browser fetches them twice. -->
+    <link rel="preload" href="/fonts/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-v24-latin-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-v24-latin-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" as="image" href="/linkedin-image.webp" />
 
     <title>Levan Mosiashvili</title>
     <meta name="description" content="Frontend Developer Portfolio of Levan Mosiashvili" />

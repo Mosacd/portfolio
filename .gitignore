@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Local image tooling. Depends on sharp, which is deliberately not a project
+# dependency: it is a one-off optimisation step, not part of the build. Run
+# `npm i --no-save sharp` if you need to re-run these, then commit only the
+# resulting images.
+scripts/optimize-images.mjs
+scripts/image-report.mjs
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

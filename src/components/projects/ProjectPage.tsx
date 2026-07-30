@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { projectData } from "./project.data";
+import { projectDetails } from "./projectDetail.data";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ProjectPage = () => {
@@ -28,7 +29,11 @@ const ProjectPage = () => {
     );
   }
 
-  const { review } = project;
+  // Long-form copy and the review live in the detail module so they stay out of the
+  // landing page bundle. Both are optional; a project without them falls back to
+  // its card description.
+  const detail = slug ? projectDetails[slug] : undefined;
+  const review = detail?.review;
 
   return (
     <div className="w-full max-w-7xl 2xl:max-w-screen-2xl mx-auto px-5 py-10 lg:p-10 flex flex-col gap-12">
@@ -70,7 +75,7 @@ const ProjectPage = () => {
               {project.title}
             </h1>
             <p className="text-base 2xl:text-lg leading-relaxed text-[#25282B]/80">
-              {review ? review.overview : project.details}
+              {review ? review.overview : detail?.details ?? project.description}
             </p>
           </div>
 

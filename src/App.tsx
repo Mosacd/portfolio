@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react'
+import { lazy, Suspense, useRef, type RefObject } from 'react'
 import Header, { type SectionKey } from './components/header'
 import Hero from './components/hero'
 import { usePageMeta } from '@/hooks/usePageMeta'
@@ -31,38 +31,10 @@ function App() {
     path: '/',
   });
 
-
-
-  const [fontLoaded, setFontLoaded] = useState(false);
-
-  // Never let a font request gate the whole page: reveal on success, on failure,
-  // or after a short timeout, whichever happens first.
-  useEffect(() => {
-    let settled = false;
-    const reveal = () => {
-      if (settled) return;
-      settled = true;
-      setFontLoaded(true);
-    };
-
-    const timer = setTimeout(reveal, 2000);
-
-    Promise.all([
-      document.fonts.load('500 1em Poppins'),
-      document.fonts.load('600 1em Poppins'),
-      document.fonts.load('800 1em Poppins'),
-    ])
-      .catch(() => undefined)
-      .finally(reveal);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!fontLoaded) {
-    return <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 border-8 border-[#d8a01340] border-t-[#d8a013] rounded-full animate-spin"
-    ></div>;
-  }
-
+  // No font gate here on purpose: the fonts are self-hosted, preloaded, and declared
+  // font-display: swap, so text paints immediately in the fallback and swaps to
+  // Poppins when it arrives. Blocking render on document.fonts.load would throw away
+  // that entire mechanism and delay first paint for no benefit.
   return (
     <div className='w-full relative sm:px-5 py-10 lg:p-10 max-w-7xl 2xl:max-w-screen-2xl m-auto text-center'>
       <Header scrollTo = {scrollTo} />
