@@ -86,7 +86,24 @@ html {
   box-sizing: border-box;
   background-color: var(--color-bg);
   font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  overflow-x:hidden;
+
+  /* overflow-x is hidden because the header/hero slide-in animations translate
+     elements off-screen and would otherwise create horizontal scroll. It also
+     makes the computed overflow-y `auto`, which keeps html a scroll container so
+     scrollbar-gutter below still applies. */
+  overflow-x: hidden;
+
+  /* Permanently reserve the scrollbar's space. The root container is centered
+     (max-w-7xl m-auto), so without this the scrollbar appearing -- which happens
+     late, once the lazy sections mount and the page grows past one viewport --
+     shifts the whole layout sideways by half the scrollbar width. */
+  scrollbar-gutter: stable;
+
+  /* Deliberately NOT setting scrollbar-width / scrollbar-color here. Chrome 121+
+     honours those standard properties and then ignores the ::-webkit-scrollbar
+     rules above entirely, which replaces the custom 8px bar with Chrome's native
+     one. Firefox therefore keeps its default scrollbar, as it always has --
+     ::-webkit-scrollbar never applied there either. */
 }
 
 
