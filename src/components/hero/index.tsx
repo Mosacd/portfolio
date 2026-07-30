@@ -6,11 +6,19 @@ const EMAIL = "levanmosiashvili5@gmail.com";
 
 const Hero = () => {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
+  // clipboard.writeText rejects on insecure origins and when permission is denied,
+  // so fall back to showing the address rather than failing silently.
   const copyEmail = async () => {
-    await navigator.clipboard.writeText(EMAIL);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopyFailed(true);
+      setTimeout(() => setCopyFailed(false), 4000);
+    }
   };
 
   return (
@@ -51,7 +59,7 @@ const Hero = () => {
              font-semibold text-center no-underline select-none transition-all hover:shadow-[2px_2px_0_0_black]
               hover:translate-x-[2px] hover:translate-y-[2px] items-center justify-center"
           >
-            {copied ? "Copied!" : "Email"}
+            {copied ? "Copied!" : copyFailed ? "Copy failed" : "Email"}
             {copied ? (
               <svg className="w-5" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />
@@ -63,6 +71,11 @@ const Hero = () => {
               </svg>
             )}
           </button>
+          {copyFailed && (
+            <p className="w-full text-sm 2xl:text-base select-all text-center sm:text-start">
+              {EMAIL}
+            </p>
+          )}
         </div>
       </div>
 

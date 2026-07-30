@@ -1,9 +1,9 @@
-import gymgear from "@/assets/projectImages/GymGearNew.png";
+import gymgear from "@/assets/projectImages/GymGearNew.jpg";
 import koko from "@/assets/projectImages/KoKo.jpg";
 // import neighbourly from "@/assets/projectImages/Neighbourly.jpg";
 import Kiu from "@/assets/projectImages/KIU.jpg";
 import EvCarCharger from "@/assets/projectImages/EvCarCharger.jpg";
-import gymgearW from "@/assets/projectImages/GymGearNew.png";
+import gymgearW from "@/assets/projectImages/GymGearNew.webp";
 import kokoW from "@/assets/projectImages/KoKo.webp";
 // import neighbourlyW from "@/assets/projectImages/Neighbourly.webp";
 import KiuW from "@/assets/projectImages/KIU.webp";
@@ -33,7 +33,7 @@ export const projectData: ProjectDataType[] = [
     description:
       "A full-featured e-commerce platform for gym equipment. Includes user authentication, profiles with order history and wishlists, and product reviews. Data is managed via Supabase.",
     details:
-      "GymGear is a full-stack e-commerce platform built to simulate a real-world online store for gym equipment. Users can register and log in, browse products, add items to a wishlist, place orders, and leave product reviews. Order history is persisted per user via Supabase. The project was built to practice integrating React Query for server state, React Hook Form + Zod for validated forms, and Radix UI for accessible components — all composed with Tailwind and animated with Framer Motion.",
+      "GymGear is a full-stack e-commerce platform built to simulate a real-world online store for gym equipment. Users can register and log in, browse products, add items to a wishlist, place orders, and leave product reviews. Order history is persisted per user via Supabase. The project was built to practice integrating React Query for server state, React Hook Form + Zod for validated forms, and Radix UI for accessible components, all composed with Tailwind and animated with Framer Motion.",
     review: gymgearReview,
     techstack: "React, TypeScript, Supabase, React Query, Zod, Tailwind, shadcn/ui, Framer Motion",
     webLink: "https://gym-app-7y5y.vercel.app/",

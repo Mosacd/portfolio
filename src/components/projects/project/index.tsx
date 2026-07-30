@@ -10,8 +10,7 @@ const Project = () => {
         return (
           <div
             key={project.title}
-            onClick={() => window.open(project.webLink, "_blank")}
-            className="flex relative bg-[#25282B] flex-col shadow-[4px_4px_0_0_black] hover:shadow-[10px_10px_0_0_black] group hover:translate-y-[-5px] hover:translate-x-[-5px] duration-300 cursor-pointer gap-2 items-center border-4 overflow-hidden rounded-lg card-border-animation"
+            className="flex relative bg-[#25282B] flex-col shadow-[4px_4px_0_0_black] hover:shadow-[10px_10px_0_0_black] group hover:translate-y-[-5px] hover:translate-x-[-5px] duration-300 gap-2 items-center border-4 overflow-hidden rounded-lg card-border-animation has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-[#d8a013]"
           >
             <span className="absolute flex bg-[#d8a013] text-[#25282B] px-2 text-2xl top-2/7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 rounded-full p-2 duration-300">
               <svg className="w-7 sm:w-12 fill-black rotate-270" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -42,10 +41,19 @@ const Project = () => {
                 </g>
               </svg>
             </span>
-            <ResponsiveImage src={project.image} webp="" alt={project.title} className="max-h-65 2xl:max-h-80 w-full" />
+            <ResponsiveImage src={project.image} webp={project.imageWebp} alt={project.title} className="max-h-65 2xl:max-h-80 w-full" />
             <div className="max-w-6/7 flex flex-col justify-between h-full p-3 2xl:p-5">
               <div className="w-full flex flex-col gap-2 2xl:gap-3 h-full overflow-hidden text-start *:text-white">
-                <h3 className="text-xl 2xl:text-2xl font-semibold self-center">{project.title}</h3>
+                {/* Stretched link: the ::after covers the whole card, so the card is
+                    clickable while staying a single focusable, valid anchor. */}
+                <a
+                  href={project.webLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="self-center cursor-pointer after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+                >
+                  <h3 className="text-xl 2xl:text-2xl font-semibold">{project.title}</h3>
+                </a>
                 <p className="2xl:text-lg flex-1">{project.description}</p>
                 <hr className="border-white/20" />
                 <div className="flex flex-wrap gap-2">
@@ -58,8 +66,8 @@ const Project = () => {
               </div>
               <div className="w-full mt-4 border-t border-white/10 pt-3 pb-4 h-fit flex justify-between items-center gap-3">
                 <button
-                  onClick={(e) => { e.stopPropagation(); navigate(`/projects/${project.slug}`); }}
-                  className="flex items-center gap-1.5 text-sm 2xl:text-base font-semibold px-4 py-2 rounded-sm border border-white/20 text-white/70 hover:text-white hover:border-white/50 duration-200 cursor-pointer"
+                  onClick={() => navigate(`/projects/${project.slug}`)}
+                  className="relative z-10 flex items-center gap-1.5 text-sm 2xl:text-base font-semibold px-4 py-2 rounded-sm border border-white/20 text-white/70 hover:text-white hover:border-white/50 duration-200 cursor-pointer"
                 >
                   View Details
                 </button>
@@ -68,8 +76,7 @@ const Project = () => {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="cursor-pointer flex items-center gap-2 text-sm 2xl:text-base font-semibold text-white/70 hover:text-white duration-200"
+                    className="relative z-10 cursor-pointer flex items-center gap-2 text-sm 2xl:text-base font-semibold text-white/70 hover:text-white duration-200"
                   >
                     <svg className="fill-[white] w-7 2xl:w-9 hover:scale-115 duration-300 rounded-full" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="">
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

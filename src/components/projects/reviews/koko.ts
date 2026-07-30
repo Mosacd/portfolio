@@ -1,6 +1,6 @@
 export const kokoReview = {
   overview:
-    "KoKo is a group hackathon project — an interactive sign language learning app designed to make ASL accessible and engaging. It features three distinct exercise types powered by live webcam gesture recognition via Google MediaPipe, a clean bilingual UI, and a score system that stays in sync across the app via a custom event bus.",
+    "KoKo is a group hackathon project: an interactive sign language learning app designed to make ASL accessible and engaging. It features three distinct exercise types powered by live webcam gesture recognition via Google MediaPipe, a clean bilingual UI, and a score system that stays in sync across the app via a custom event bus.",
 
   techStack: [
     { layer: "Framework", technology: "React" },
@@ -31,9 +31,9 @@ export const kokoReview = {
       features: [
         "Single route dispatches to Sign It, Watch It, or Read It at runtime via a switch on exerciseType from the data",
         "Keeps URLs clean with no four separate route definitions",
-        "Sign It — live webcam mode: MediaPipe GestureRecognizer reads hand gestures frame-by-frame; finger-spell a word letter by letter in front of the camera",
-        "Watch It — watch an MP4 video of someone signing a word, then type it letter by letter into individual inputs",
-        "Read It — shown a row of static ASL hand-sign images (one per letter), type the word or sentence they spell out; split into single word and full sentence sub-types",
+        "Sign It: live webcam mode: MediaPipe GestureRecognizer reads hand gestures frame-by-frame; finger-spell a word letter by letter in front of the camera",
+        "Watch It: watch an MP4 video of someone signing a word, then type it letter by letter into individual inputs",
+        "Read It: shown a row of static ASL hand-sign images (one per letter), type the word or sentence they spell out; split into single word and full sentence sub-types",
       ],
     },
     {
@@ -65,7 +65,7 @@ export const kokoReview = {
     {
       title: "Custom Event Bus for Score Sync",
       description:
-        "Score synchronization uses a native window.CustomEvent bus instead of React Context. Any mounted useScore(lang) instance stays in sync by listening to 'koko-score-update' on window — avoids Context re-render overhead in a performance-sensitive app.",
+        "Score synchronization uses a native window.CustomEvent bus instead of React Context. Any mounted useScore(lang) instance stays in sync by listening to 'koko-score-update' on window, which avoids Context re-render overhead in a performance-sensitive app.",
     },
   ],
 

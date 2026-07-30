@@ -1,15 +1,21 @@
-import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { projectData } from "./project.data";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ProjectPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
+  // Scroll reset is handled globally by <ScrollToTop /> in main.tsx.
   const project = projectData.find((p) => p.slug === slug);
+
+  usePageMeta({
+    title: project
+      ? `${project.title} | Levan Mosiashvili`
+      : "Project not found | Levan Mosiashvili",
+    description: project?.description ?? "Frontend Developer Portfolio of Levan Mosiashvili",
+    path: `/projects/${slug ?? ""}`,
+  });
 
   if (!project) {
     return (
@@ -49,11 +55,14 @@ const ProjectPage = () => {
 
       {/* Hero + info side by side */}
       <div className="flex flex-col sm:flex-row gap-8 2xl:gap-12">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full sm:w-1/2 max-h-72 2xl:max-h-96 object-cover rounded-sm flex-shrink-0"
-        />
+        <picture className="w-full sm:w-1/2 flex-shrink-0">
+          {project.imageWebp && <source srcSet={project.imageWebp} type="image/webp" />}
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full max-h-72 2xl:max-h-96 object-cover rounded-sm"
+          />
+        </picture>
 
         <div className="flex flex-col gap-4 justify-between">
           <div className="flex flex-col gap-3">
@@ -128,7 +137,7 @@ const ProjectPage = () => {
                 <ul className="flex flex-col gap-1">
                   {page.features.map((f) => (
                     <li key={f} className="text-sm 2xl:text-base text-[#25282B]/70 flex gap-2">
-                      <span className="text-[#d8a013] mt-0.5">—</span>
+                      <span className="text-[#d8a013] mt-0.5">•</span>
                       {f}
                     </li>
                   ))}
@@ -210,7 +219,7 @@ const ProjectPage = () => {
           <ul className="flex flex-col gap-3">
             {review.deployment.map((item) => (
               <li key={item} className="flex gap-2 text-sm 2xl:text-base text-[#25282B]/80">
-                <span className="text-[#d8a013] font-bold mt-0.5">—</span>
+                <span className="text-[#d8a013] font-bold mt-0.5">•</span>
                 {item}
               </li>
             ))}
@@ -224,7 +233,7 @@ const ProjectPage = () => {
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {review.uiPatterns.map((pattern) => (
               <li key={pattern} className="flex gap-2 text-sm 2xl:text-base text-[#25282B]/80">
-                <span className="text-[#d8a013] font-bold mt-0.5">—</span>
+                <span className="text-[#d8a013] font-bold mt-0.5">•</span>
                 {pattern}
               </li>
             ))}

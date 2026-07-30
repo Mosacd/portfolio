@@ -1,37 +1,61 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import Header from './components/header'
+import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from 'react'
+import Header, { type SectionKey } from './components/header'
 import Hero from './components/hero'
+import { usePageMeta } from '@/hooks/usePageMeta'
 
-const TechStack = lazy(() => import('./components/techstack'))
+const Experience = lazy(() => import('./components/experience'))
 const Projects = lazy(() => import('./components/projects'))
+const TechStack = lazy(() => import('./components/techstack'))
 const About = lazy(() => import('./components/about'))
 const RobotChatbot = lazy(() => import('./components/chatBot'))
 
 
 function App() {
 
-  const sectionRefs = {
-    home: useRef<HTMLDivElement | null>(null),
-    about: useRef<HTMLDivElement | null>(null),
+  // Typed as Record<SectionKey, ...> so a nav item without a matching ref is a build error.
+  const sectionRefs: Record<SectionKey, RefObject<HTMLDivElement | null>> = {
+    experience: useRef<HTMLDivElement | null>(null),
     projects: useRef<HTMLDivElement | null>(null),
+    techstack: useRef<HTMLDivElement | null>(null),
+    about: useRef<HTMLDivElement | null>(null),
   };
 
-  const scrollTo = (section: keyof typeof sectionRefs) => {
+  const scrollTo = (section: SectionKey) => {
     sectionRefs[section].current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Restores the index.html defaults when returning here from a project page.
+  usePageMeta({
+    title: 'Levan Mosiashvili',
+    description: 'Frontend Developer Portfolio of Levan Mosiashvili',
+    path: '/',
+  });
 
 
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  // Never let a font request gate the whole page: reveal on success, on failure,
+  // or after a short timeout, whichever happens first.
   useEffect(() => {
+    let settled = false;
+    const reveal = () => {
+      if (settled) return;
+      settled = true;
+      setFontLoaded(true);
+    };
+
+    const timer = setTimeout(reveal, 2000);
+
     Promise.all([
       document.fonts.load('500 1em Poppins'),
       document.fonts.load('600 1em Poppins'),
       document.fonts.load('800 1em Poppins'),
-    ]).then(() => {
-      setFontLoaded(true);
-    });
+    ])
+      .catch(() => undefined)
+      .finally(reveal);
+
+    return () => clearTimeout(timer);
   }, []);
 
   if (!fontLoaded) {
@@ -45,8 +69,9 @@ function App() {
       <Hero/>
       <Suspense>
       <div className='flex flex-col gap-40 mt-40 fancy-block *:pt-10'>
-      <TechStack homeRef = {sectionRefs.home}/>
+      <Experience experienceRef = {sectionRefs.experience}/>
       <Projects projectsRef = {sectionRefs.projects} />
+      <TechStack techstackRef = {sectionRefs.techstack}/>
       <About aboutRef = {sectionRefs.about}/>
       </div>
       <RobotChatbot/>

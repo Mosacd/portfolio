@@ -24,16 +24,19 @@
     --color-main-button: #34347C;
   }
 
-  h1,h2,h3,p,span,li{
+  /* `button` is included so nav buttons inherit the site text colour rather than
+     the UA default. Tailwind text-* utilities still override this. */
+  h1,h2,h3,p,span,li,button{
     color: var(--color-main-color);
   }
 
-  .about-card h1,
-  .about-card h2,
-  .about-card h3,
-  .about-card p,
-  .about-card span,
-  .about-card li {
+  /* Dark card surface used by the Experience and About sections. */
+  .info-card h1,
+  .info-card h2,
+  .info-card h3,
+  .info-card p,
+  .info-card span,
+  .info-card li {
     color: white;
   }
   
@@ -54,16 +57,6 @@ html {
   overflow-x:hidden;
 }
 
-
-
-.no-js .slide-in-left,
-.no-js .slide-in-right,
-.no-js .slide-in-top {
-  transform: none !important;
-  animation: none !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
 
 
 .hiddenClass {

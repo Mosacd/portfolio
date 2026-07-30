@@ -1,53 +1,28 @@
 import Uni from "@/assets/kiuLogo2.svg";
-import devsData from "@/assets/devsdata.svg";
 import tbc from "@/assets/TBC2.svg";
+import geolab from "@/assets/geolab.png";
+
 export const Education = [
   {
     image: Uni,
     title: "B.Sc. in Computer Science (Management Minor)",
-    institution: "Kutaisi International University - Senior Year",
+    institution:
+      "Kutaisi International University - Expected graduation: Feb 2027",
     date: "2022 Sept - Present",
     description:
       "Relevant coursework: Web Development (HTML/CSS, JavaScript, React), Java Programming, Cloud Computing (AWS), Databases (PostgreSQL, MongoDB), Software Engineering (Agile/Scrum, Waterfall), Full-Stack Development (React, TypeScript, Express.js, testing with Jest/Mocha)",
   },
 ];
 
-export const Work = [
-  {
-    image: Uni,
-    title: "Frontend Developer (Part-time)",
-    workPlace: "Kutaisi International University",
-    date: "2025 Nov - 2026 Apr",
-    description:
-      "Developed a separate Next.js admin dashboard using TypeScript, Tailwind CSS, and Docker, implementing role-based authentication (PR/Admin) and an article publishing/approval workflow.",
-  },
-  {
-    image: devsData,
-    title: "Junior Frontend Developer",
-    workPlace: "DevsData Tech Talant LLC – IT Recruitment",
-    date: "2025 Jul - 2026 Mar",
-    description:
-      "Maintained and improved the company website by implementing responsive UI updates, fixing frontend bugs, and integrating new designs using HTML, SCSS, and JavaScript within a PHP/WordPress CMS environment.",
-  },
-  {
-    image: null,
-    title: "Full-Stack Developer (Freelance)",
-    workPlace: "Independent Projects",
-    date: "2024 - 2026",
-    description:
-      "EV Charger E-commerce Site (evcarcharger.ge): Built a responsive e-commerce platform using React, TypeScript, Tailwind CSS, and Supabase, including product catalog, cart, and checkout functionality. AI Customer Support Platform (Simpler.ge): Contributed to development of an AI-powered customer support platform using PostgreSQL, Drizzle ORM, BullMQ, and LangChain/LangGraph integrations across Facebook, Messenger, and WhatsApp.",
-  },
-  {
-    image: Uni,
-    title: "Teaching Assistant – Web Development",
-    workPlace: "Kutaisi International University",
-    date: "2023 Sept - 2024 Jan",
-    description:
-      "Mentored students in HTML, CSS, JavaScript, and React fundamentals through assignments and hands-on exercises.",
-  },
-];
-
 export const Certificates = [
+  {
+    image: geolab,
+    title: "UI/UX Design Course",
+    institution: "GeoLab, GAU & Leavingstone",
+    date: "2026 May - 2026 Jul",
+    description:
+      "Intensive program covering the full product design process, from UX research and strategy through UI design and developer handoff. Worked in Figma across user flows, wireframing, interactive prototyping, usability testing, and design systems, delivering responsive end-to-end cases. Applies directly to Figma-to-production frontend work, from the design side of the handoff.",
+  },
   {
     image: tbc,
     title: "React Accelerator",

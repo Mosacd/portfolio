@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { Certificates, Education, Work } from "./index.data";
+import { Certificates, Education } from "./index.data";
 
 const About: React.FC<{ aboutRef: RefObject<HTMLDivElement | null> }> = ({
   aboutRef,
@@ -16,33 +16,9 @@ const About: React.FC<{ aboutRef: RefObject<HTMLDivElement | null> }> = ({
       <div className="w-full grid grid-cols-1 gap-12 sm:gap-20">
 
         <div className="flex flex-col w-full gap-4 2xl:gap-6">
-          <h2 className="text-start text-[24px] 2xl:text-[30px] font-semibold">Work Experience</h2>
-          {Work.map((item, index) => (
-            <div key={index} className="about-card flex flex-col gap-3 2xl:gap-4 p-4 sm:p-5 2xl:p-7 text-start bg-[#25282B] rounded-sm border-l-4 border-[#d8a013]">
-              <div className="flex items-center gap-4 2xl:gap-6">
-                {item.image ? (
-                  <img src={item.image} alt={item.title} className="w-14 h-14 2xl:w-20 2xl:h-20 flex-shrink-0 rounded-md object-contain" />
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d8a013" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14 2xl:w-20 2xl:h-20 flex-shrink-0">
-                    <polyline points="16 18 22 12 16 6" />
-                    <polyline points="8 6 2 12 8 18" />
-                  </svg>
-                )}
-                <div className="flex-1 flex flex-col gap-1">
-                  <p className="font-semibold text-lg 2xl:text-xl leading-tight">{item.title}</p>
-                  <span className="text-sm 2xl:text-base text-white/60">{item.date}</span>
-                </div>
-              </div>
-              <p className="text-sm 2xl:text-base text-[#d8a013] font-semibold pl-18 2xl:pl-26">{item.workPlace}</p>
-              <p className="text-sm 2xl:text-base text-white/70 leading-relaxed pl-18 2xl:pl-26">{item.description}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col w-full gap-4 2xl:gap-6">
           <h2 className="text-start text-[24px] 2xl:text-[30px] font-semibold">Education</h2>
           {Education.map((item, index) => (
-            <div key={index} className="about-card flex flex-col gap-3 2xl:gap-4 p-4 sm:p-5 2xl:p-7 text-start bg-[#25282B] rounded-sm border-l-4 border-[#d8a013]">
+            <div key={index} className="info-card flex flex-col gap-3 2xl:gap-4 p-4 sm:p-5 2xl:p-7 text-start bg-[#25282B] rounded-sm border-l-4 border-[#d8a013]">
               <div className="flex items-center gap-4 2xl:gap-6">
                 <img src={item.image} alt={item.title} className="w-14 h-14 2xl:w-20 2xl:h-20 flex-shrink-0 rounded-md object-contain" />
                 <div className="flex-1 flex flex-col gap-1">
@@ -59,7 +35,7 @@ const About: React.FC<{ aboutRef: RefObject<HTMLDivElement | null> }> = ({
         <div className="flex flex-col w-full gap-4 2xl:gap-6">
           <h2 className="text-start text-[24px] 2xl:text-[30px] font-semibold">Certificates</h2>
           {Certificates.map((item, index) => (
-            <div key={index} className="about-card flex flex-col gap-3 2xl:gap-4 p-4 sm:p-5 2xl:p-7 text-start bg-[#25282B] rounded-sm border-l-4 border-[#d8a013]">
+            <div key={index} className="info-card flex flex-col gap-3 2xl:gap-4 p-4 sm:p-5 2xl:p-7 text-start bg-[#25282B] rounded-sm border-l-4 border-[#d8a013]">
               <div className="flex items-center gap-4 2xl:gap-6">
                 <img src={item.image} alt={item.title} className="w-14 h-14 2xl:w-20 2xl:h-20 flex-shrink-0 rounded-md object-contain" />
                 <div className="flex-1 flex flex-col gap-1">

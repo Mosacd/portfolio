@@ -8,8 +8,12 @@ const WindParticles = () => {
                     style={{
                         left: `${(i * 7) % 100}%`,
                         bottom: `-${(i * 11) % 30}px`,
-                        animationDelay: `${(i * 0.4) % 3}s`,
-                        animation: `windUp ${3 + ((i * 0.3) % 2)}s linear infinite`
+                        // Longhand only: the `animation` shorthand would reset the delay to 0.
+                        animationName: "windUp",
+                        animationDuration: `${3 + ((i * 0.3) % 2)}s`,
+                        animationTimingFunction: "linear",
+                        animationIterationCount: "infinite",
+                        animationDelay: `${(i * 0.4) % 3}s`
                     }}
                 />
             ))}

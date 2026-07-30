@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-ruby-pi-33.vercel.app/sitemap.xml

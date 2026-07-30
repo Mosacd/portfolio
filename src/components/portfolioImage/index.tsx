@@ -1,4 +1,4 @@
-const imageUrl = "/linkedin-image.png";
+const imageUrl = "/linkedin-image.jpg";
 
 const BlobPortfolio = ({ className = '' }) => {
   return (

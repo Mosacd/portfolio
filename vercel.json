@@ -1,13 +1,10 @@
 {
   "version": 2,
   "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/projects/gymgear", "destination": "/projects/gymgear/index.html" },
+    { "source": "/projects/kiu", "destination": "/projects/kiu/index.html" },
+    { "source": "/projects/koko", "destination": "/projects/koko/index.html" },
+    { "source": "/projects/evcarcharger", "destination": "/projects/evcarcharger/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

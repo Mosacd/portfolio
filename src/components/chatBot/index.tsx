@@ -34,68 +34,32 @@ const RobotChatbot: React.FC = () => {
 
   const handleSend = async () => {
     const userText = input.trim();
-    if (!userText) return;
+    if (!userText || loading || cooldown) return;
 
     setMessages((prev) => [...prev, { sender: "user", text: userText }]);
     setInput("");
     setLoading(true);
 
     try {
-      const context = `
-    You are a friendly personal assistant chatbot representing the user, Levan Mosiashvili.
-
-    YOUR PERSONALITY & PURPOSE:
-    - You are warm, helpful, and conversational.
-    - You speak clearly and confidently, like a knowledgeable assistant on a modern developer portfolio.
-    - You help visitors learn about Levan’s background, skills, projects, and interests.
-    - You can answer questions about his experience, technologies he works with, his projects, and his long-term goals.
-
-    INFORMATION ABOUT THE USER (LEVAN MOSIASHVILI):
-    - Name: Levan Mosiashvili
-    - Role: Front-End Developer (with growing full-stack skills)
-    - Skills: React, TypeScript, JavaScript, Tailwind CSS, Shadcn/UI, Vite, Supabase, Node.js, Git/GitHub, GitLab, DevOps basics, WordPress, design-oriented development, responsive UI, SEO-friendly frontend.
-    - Experience:
-    • Front-End Developer at DevsData Tech Talent LLC.
-    • Works on large-scale WordPress and React-based projects.
-    • Strong experience with UI/UX implementation, Pixel-perfect builds, complex components, animations, and performance optimization.
-    • Academic background as a Computer Science student at Kutaisi International University (KIU).
-    - Projects:
-    • KIU Official Website (React + Vite + Tailwind) with dynamic pages, translations, carousels, and responsive layouts.
-    • EV Car Charger Admin Panel (React + Ant Design + Supabase + Node) including orders, products, filtering, and dashboard elements.
-    • DevsData Corporate Website work — case studies, testimonials, layout fixes, branching workflows, and large repo maintenance.
-    • Side projects: GymGear fitness UI, Neighbourly community webapp, Koko sign language practice app.
-    - Interests:
-    • Front-end development, UI/UX, TypeScript, Supabase, backend fundamentals, cloud.
-    • Learning languages (Spanish and Russian).
-    • Personal growth, building portfolio projects, hackathons, and research.
-    - Contact:
-    • Preferred through LinkedIn or email provided on the website.
-    - Location: Georgia (Kutaisi/Tbilisi).
-
-    GUIDELINES:
-    - Always answer in a friendly, human, conversational tone.
-    - Keep responses SHORT — 1-3 sentences max. Only elaborate if the user explicitly asks for more detail.
-    - You may elaborate on Levan’s experience or projects, but never invent fake achievements.
-    - If asked something you don’t know, politely say so and suggest they reach out directly.
-    - If the question is unrelated to Levan or his work, gently guide the conversation back to portfolio-related topics.
-    - Never share personal data beyond what is listed here.
-
-    Your job is to represent Levan professionally and help visitors understand who he is, what he builds, and how he works.
-`;
-
-      const prompt = `${context}\nUser: ${userText}\nAssistant:`;
-
+      // Only the visitor's message goes over the wire. The persona and all
+      // personal details live server-side in api/chat.js.
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ message: userText }),
       });
 
+      const data = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+        // Surface whatever the server explained (rate limit, too long, blocked
+        // origin). Falling back to a generic message here would hide real
+        // misconfiguration behind "please try again".
+        const serverMessage = typeof data?.error === "string" ? data.error : null;
+        if (!serverMessage) console.error(`Chat request failed: ${response.status}`);
+        throw new Error(serverMessage || `Server error: ${response.status}`);
       }
 
-      const data = await response.json();
       const botReply = data?.reply;
 
       if (!botReply) {
@@ -103,12 +67,15 @@ const RobotChatbot: React.FC = () => {
       }
 
       setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
-    } catch {
+    } catch (err) {
       setMessages((prev) => [
         ...prev,
         {
           sender: "bot",
-          text: "Sorry, I had trouble processing your question. Please try again!",
+          text:
+            err instanceof Error && !err.message.startsWith("Server error")
+              ? err.message
+              : "Sorry, I had trouble processing your question. Please try again!",
         },
       ]);
     } finally {
@@ -170,9 +137,10 @@ const RobotChatbot: React.FC = () => {
           <input
             className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-[1px] focus:ring-black transition-all"
             value={input}
+            maxLength={500}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
-            onKeyDown={(e) => e.key === "Enter" && !cooldown && handleSend()}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
           />
           <button
             className="px-4 py-2 bg-[#d8a013] max-sm:hidden duration-300 cursor-pointer hover:bg-[#9e760f] rounded-md disabled:opacity-50"

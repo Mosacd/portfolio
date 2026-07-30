@@ -1,5 +1,5 @@
 export const kiuReview = {
-  note: "This is a personal competition project — not the official KIU website and not affiliated with Kutaisi International University.",
+  note: "This is a personal competition project, not the official KIU website and not affiliated with Kutaisi International University.",
 
   overview:
     "KIU Website is a fully bilingual (English / Georgian) single-page application covering programs, news, admissions, research, student life, campus, vacancies, and project initiatives. The site features a Gemini-powered AI chatbot, sticky section navigation on content-heavy pages, lazy-loaded page transitions with slide animations, and a Docker + Vercel dual-deployment setup.",
@@ -17,7 +17,7 @@ export const kiuReview = {
     { layer: "Carousel", technology: "Embla Carousel React 8.6.0" },
     { layer: "Forms", technology: "React Hook Form 7.65.0 + Zod 4.1.12" },
     { layer: "Email", technology: "@emailjs/browser (vacancy form)" },
-    { layer: "AI / Chatbot", technology: "@google/generative-ai — Gemini 2.5 Flash" },
+    { layer: "AI / Chatbot", technology: "@google/generative-ai: Gemini 2.5 Flash" },
     { layer: "Backend (local)", technology: "Express 5.1.0 (mirrors Vercel serverless)" },
     { layer: "Serverless", technology: "Vercel (@vercel/node 5.4.1)" },
     { layer: "Containerization", technology: "Docker multi-stage + docker-compose" },
@@ -29,19 +29,19 @@ export const kiuReview = {
       name: "Home",
       path: "/:lang",
       features: [
-        "CarouselHero — auto-advancing Embla carousel with 5 locale-specific hero slides (separate EN/KA image sets)",
-        "ProgramHome — program category teasers linking to /programs",
-        "AboutHome — editorial about-the-university section",
-        "CampusHome — campus image block, GalleryHome — static photo grid",
-        "NewsHome — latest news cards with a nested NewsCarousel",
+        "CarouselHero: auto-advancing Embla carousel with 5 locale-specific hero slides (separate EN/KA image sets)",
+        "ProgramHome: program category teasers linking to /programs",
+        "AboutHome: editorial about-the-university section",
+        "CampusHome: campus image block. GalleryHome: static photo grid",
+        "NewsHome: latest news cards with a nested NewsCarousel",
       ],
     },
     {
       name: "News + Single News",
       path: "/:lang/news, /:lang/news/:id",
       features: [
-        "SectionSwitcher — tab/category filter bar (All, Academic, University, Science, etc.)",
-        "NewsGrid — filtered grid of NewsCard (desktop) and NewsCardMobile (mobile)",
+        "SectionSwitcher: tab/category filter bar (All, Academic, University, Science, etc.)",
+        "NewsGrid: filtered grid of NewsCard (desktop) and NewsCardMobile (mobile)",
         "Single news: NewsDetailsHero, full article body, SimilarNews at the bottom",
         "Content hardcoded in newsItems.ts with separate EN and KA arrays (6 items each)",
       ],
@@ -50,8 +50,8 @@ export const kiuReview = {
       name: "Programs + Single Program",
       path: "/:lang/programs, /:lang/programs/:id",
       features: [
-        "ProgramsTabs — Radix Tabs filtering by degree type (Bachelor, Master, Single-Cycle, Doctoral)",
-        "ProgramsGrid — grid of ProgramCard components linked to individual program pages",
+        "ProgramsTabs: Radix Tabs filtering by degree type (Bachelor, Master, Single-Cycle, Doctoral)",
+        "ProgramsGrid: grid of ProgramCard components linked to individual program pages",
         "Single program: 8 section components in SideSectionsLayout with sticky sidebar nav",
         "Program-specific theming (CS: blue, Mathematics: purple)",
         "Full data for computerScience and mathematics; other 9 programs show a fallback",
@@ -86,7 +86,7 @@ export const kiuReview = {
       name: "Projects",
       path: "/:lang/projects, /:lang/projects/youthuni, /:lang/projects/frontiers",
       features: [
-        "ProjectsGrid — cards linking to Youth University and Advancing Frontiers sub-pages",
+        "ProjectsGrid: cards linking to Youth University and Advancing Frontiers sub-pages",
         "Each sub-page has its own Hero + Detail component pair",
       ],
     },
@@ -147,18 +147,18 @@ export const kiuReview = {
   },
 
   deployment: [
-    "Vercel (primary) — vercel.json configures a catch-all SPA rewrite (/** to /index.html). The serverless function at api/chat.ts is handled automatically by Vercel's file-based routing.",
-    "Docker (alternative) — multi-stage Dockerfile: Node 18-alpine build stage runs npm ci + npm run build; Nginx:alpine serve stage copies dist/ into its HTML root.",
+    "Vercel (primary): vercel.json configures a catch-all SPA rewrite (/** to /index.html). The serverless function at api/chat.ts is handled automatically by Vercel's file-based routing.",
+    "Docker (alternative): multi-stage Dockerfile: Node 18-alpine build stage runs npm ci + npm run build; Nginx:alpine serve stage copies dist/ into its HTML root.",
     "docker-compose orchestrates two services: frontend (Nginx on port 3000) and backend (Express on port 5000, internal 3001). Vite proxies /api to the backend in local dev.",
   ],
 
   uiPatterns: [
-    "PageWrapper shell — hero slot (fade animation) + content slot (slide-up animation) used on every interior page",
-    "HeroSection — reusable component accepting titleText, imageSrc, buttonLink, and buttonIcon, ensuring visual consistency across all pages",
-    "SideSectionsLayout — sticky section nav (desktop aside) + floating Sheet trigger (mobile) with scroll-tracked active section",
+    "PageWrapper shell: hero slot (fade animation) + content slot (slide-up animation) used on every interior page",
+    "HeroSection: reusable component accepting titleText, imageSrc, buttonLink, and buttonIcon, ensuring visual consistency across all pages",
+    "SideSectionsLayout: sticky section nav (desktop aside) + floating Sheet trigger (mobile) with scroll-tracked active section",
     "Embla Carousel used in 4 locations: home hero, campus images, home news previews, and related programs",
     "Image preloader utility preloads 5 locale hero slides + 11 page heroes in parallel on startup",
-    "SEO — SeoHead imperatively updates document.title and meta description/keywords via a static seoMap with separate EN/KA values",
+    "SEO: SeoHead imperatively updates document.title and meta description/keywords via a static seoMap with separate EN/KA values",
     "Lazy-loaded page transitions with @keyframes pageContentFade (hero) and pageContentSlide (content) defined in index.css",
   ],
 };
