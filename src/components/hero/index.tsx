@@ -32,8 +32,8 @@ const Hero = () => {
 
             <BlobPortfolio className=" w-full sm:hidden max-w-20 max-h-20" />
           </div>
-          <h1 className="leading-tight font-extrabold text-6xl sm:text-6xl lg:text-8xl 2xl:text-9xl text-shadow">
-            Frontend Developer
+          <h1 className="leading-tight font-extrabold text-6xl sm:text-6xl lg:text-[92px] 2xl:text-[120px] text-shadow">
+            Full-Stack Developer
           </h1>
           <h2 className="text-xl sm:text-xl lg:text-3xl 2xl:text-4xl font-medium mt-3 sm:mt-0">
             based in Georgia.
