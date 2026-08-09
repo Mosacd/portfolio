@@ -246,6 +246,24 @@ const ProjectPage = () => {
         </Section>
       )}
 
+      {/* Lighthouse Scores */}
+      {review?.lighthouseScores && (
+        <Section title="Lighthouse Scores">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 2xl:gap-7">
+            {review.lighthouseScores.map((entry) => (
+              <div key={entry.label} className="flex flex-col gap-3">
+                <img
+                  src={entry.image}
+                  alt={`Lighthouse ${entry.label} audit results`}
+                  className="w-full rounded-sm border border-[#25282B]/10"
+                />
+                <span className="text-sm 2xl:text-base font-semibold text-[#25282B]/70 text-center">{entry.label}</span>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
     </div>
   );
 };

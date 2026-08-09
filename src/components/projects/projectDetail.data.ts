@@ -12,6 +12,7 @@ export type ProjectReview = {
   i18n?: { overview: string; namespaces?: { namespace: string; page: string }[] };
   deployment?: string[];
   uiPatterns?: string[];
+  lighthouseScores?: { label: string; image: string }[];
 };
 
 type ProjectDetail = {
